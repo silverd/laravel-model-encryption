@@ -18,7 +18,7 @@ class EncryptableQueryBuilder extends Builder
 
     public function where($column, $operator = null, $value = null, $boolean = 'and')
     {
-        if ($this->model->isEncryptable($column)) {
+        if (method_exists($this->model, 'isEncryptable') && is_string($column) && $this->model->isEncryptable($column)) {
 
             [$value, $operator] = $this->prepareValueAndOperator($value, $operator, func_num_args() === 2);
 
