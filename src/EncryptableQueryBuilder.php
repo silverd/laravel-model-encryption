@@ -32,13 +32,13 @@ class EncryptableQueryBuilder extends Builder
     {
         $column = app('encryption')->getDecryptExpr($column);
 
-        return $this->whereRaw($column . ' ' . $rawSQL, $bindings);
+        return $this->whereRaw('CONVERT(' . $column . ' USING utf8mb4) ' . $rawSQL, $bindings);
     }
 
     public function orWhereDecrypt($column, string $rawSQL, array $bindings = [])
     {
         $column = app('encryption')->getDecryptExpr($column);
 
-        return $this->orWhereRaw($column . ' ' . $rawSQL, $bindings);
+        return $this->orWhereRaw('CONVERT(' . $column . ' USING utf8mb4) ' . $rawSQL, $bindings);
     }
 }
