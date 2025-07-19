@@ -8,7 +8,7 @@ trait Encryptable
     {
         $field = str_replace($this->getTable() . '.', '', $field);
 
-        return in_array($field, $this->encryptable);
+        return in_array($field, $this->getEncryptable());
     }
 
     public function decryptAttribute($value)
@@ -63,7 +63,7 @@ trait Encryptable
 
     public function getEncryptable()
     {
-        return $this->encryptable ?: [];
+        return $this->encryptable ?? [];
     }
 
     public function getEncryptExpr(string $field)
