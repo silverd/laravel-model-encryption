@@ -41,4 +41,11 @@ class EncryptableQueryBuilder extends Builder
 
         return $this->orWhereRaw('CONVERT(' . $column . ' USING utf8mb4) ' . $rawSQL, $bindings);
     }
+
+    public function orderByDecrypt($column, string $direction = 'asc')
+    {
+        $column = app('encryption')->getDecryptExpr($column);
+
+        return $this->orderByRaw('CONVERT(' . $column . ' USING utf8mb4) ' . $direction);
+    }
 }
